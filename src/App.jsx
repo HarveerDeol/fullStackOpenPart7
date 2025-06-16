@@ -52,7 +52,7 @@ const CreateNew = (props) => {
   const content = useField('text')
   const author = useField('text')
   const info = useField('text')
-  
+
   const navigate = useNavigate()
   //const username = useField('text')
 
@@ -62,7 +62,7 @@ const CreateNew = (props) => {
     props.addNew({
       content: content.value,
       author: author.value,
-      infor : info.value,
+      info : info.value,
       votes: 0
     })
     navigate('/AnecdoteList')
@@ -74,17 +74,32 @@ const CreateNew = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input {...content} />
+          <input
+            type={content.type}
+            value={content.value}
+            onChange={content.onChange}  />
         </div>
         <div>
           author
-          <input {...author} />
+          <input
+            type={author.type}
+            value={author.value}
+            onChange={author.onChange}  />
         </div>
         <div>
           url for more info
-          <input {...info} />
+          <input
+              type={info.type}
+              value={info.value}
+              onChange={info.onChange}  />
         </div>
-        <button>create</button>
+        <button type='submit'>create</button>
+        <button type='reset' onClick={() =>{
+          content.clearField()
+          author.clearField()
+          info.clearField()
+        }}>reset</button>
+
       </form>
     </div>
   )

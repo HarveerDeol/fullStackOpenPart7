@@ -7,16 +7,18 @@ export const useField = (type) => {
   const onChange = (event) => {
     setValue(event.target.value)
   }
+  const  clearField = () => {
+    setValue('')
+  }
 
   return {
     type,
     value,
-    onChange
+    onChange,
+    clearField
+
   }
+  
 }
 
 // modules can have several named exports
-
-export const clearField = () => {
-  // ...
-}
