@@ -1,17 +1,5 @@
 import { useState } from 'react'
-
-const Menu = () => {
-  const padding = {
-    paddingRight: 5
-  }
-  return (
-    <div>
-      <a href='#' style={padding}>anecdotes</a>
-      <a href='#' style={padding}>create new</a>
-      <a href='#' style={padding}>about</a>
-    </div>
-  )
-}
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
 
 const AnecdoteList = ({ anecdotes }) => (
   <div>
@@ -122,14 +110,30 @@ const App = () => {
     setAnecdotes(anecdotes.map(a => a.id === id ? voted : a))
   }
 
+  const padding = {
+    paddingRight: 5
+  }
+
   return (
     <div>
       <h1>Software anecdotes</h1>
-      <Menu />
-      <AnecdoteList anecdotes={anecdotes} />
-      <About />
-      <CreateNew addNew={addNew} />
+      <Router>
+    <div>
+      <Link  style={padding} to='/AnecdoteList'>anecdotes</Link>
+      <Link  style={padding} to='/CreateNew'>create new</Link>
+      <Link  style={padding} to='/About'>about</Link>
+    </div>
+
+    <Routes>
+      <Route path ='/AnecdoteList' element={<AnecdoteList anecdotes={anecdotes} />}/>
+      <Route path ='/CreateNew' element={<CreateNew addNew={addNew} />}/>
+      <Route path ='/About' element={<About />}/>
+    </Routes>
+
+    </Router>
+    <div>
       <Footer />
+    </div>
     </div>
   )
 }
